@@ -26,10 +26,8 @@ import java.util.Map;
 
 public class EndActivity extends AppCompatActivity {
 
-    Integer price;
-    Integer itemprice;
     RequestQueue queue;
-    List<String> dishesArray;
+    List<String> dishesArray = new ArrayList<>();
     ArrayAdapter<String> MyAdapter;
 
     @Override
@@ -73,7 +71,7 @@ public class EndActivity extends AppCompatActivity {
         }
 
         final TextView minutes = findViewById(R.id.textView9);
-        final ListView order = findViewById(R.id.yourOrder);
+        final ListView order = findViewById(R.id.listOrder);
 
         MyAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, dishesArray);
@@ -83,9 +81,6 @@ public class EndActivity extends AppCompatActivity {
         MyAdapter.notifyDataSetChanged();
 
         saveToSharedPrefs();
-
-
-
 
 
         queue =  Volley.newRequestQueue(this);

@@ -133,7 +133,6 @@ public class OrderActivity extends AppCompatActivity {
 
     public void ShowEnd(View view) {
         Intent intent = new Intent(this, EndActivity.class);
-        intent.putExtra("map", DishesMap);
         intent.putExtra("name1", dishname1);
         intent.putExtra("name2", dishname2);
         intent.putExtra("name3", dishname3);
@@ -246,101 +245,81 @@ public class OrderActivity extends AppCompatActivity {
                 if (dish6 != 0) {
                     dishesArray.add(dish6 + " X" + dishname6);
                 }
-
+                saveToSharedPrefs();
+                MyAdapter.notifyDataSetChanged();
                 return true;
             }
         });
 
-        MyAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, dishesArray);
-
-        listview.setAdapter(MyAdapter);
-
-        MyAdapter.notifyDataSetChanged();
-
-        saveToSharedPrefs();
     }
 
     public void AddOrder(View view) {
 
         TextView text = findViewById(R.id.textView3);
         text.setText("Choose the dish you want to add");
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                listview.setLongClickable(false);
-                listview.setLongClickable(true);
-                listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        listview.setLongClickable(false);
+        listview.setLongClickable(true);
 
-                    public boolean onItemLongClick(AdapterView<?> adapter, View view,
-                                                   int index, long arg3) {
-                        String item_clicked = listview.getItemAtPosition(index).toString();
-                        if (item_clicked.endsWith(dishname1)) {
-                            dish1 += 1;
-                            Toast.makeText(OrderActivity.this, dishname1 + " Added to your order",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (item_clicked.endsWith(dishname2)) {
-                            dish2 += 1;
-                            Toast.makeText(OrderActivity.this, dishname2 + " Added to your order",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (item_clicked.endsWith(dishname3)) {
-                            dish3 += 1;
-                            Toast.makeText(OrderActivity.this, dishname3 + " Added to your order",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (item_clicked.endsWith(dishname4)) {
-                            dish4 += 1;
-                            Toast.makeText(OrderActivity.this, dishname4 + " Added to your order",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (item_clicked.endsWith(dishname5)) {
-                            dish5 += 1;
-                            Toast.makeText(OrderActivity.this, dishname5 + " Added to your order",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        if (item_clicked.endsWith(dishname6)) {
-                            dish6 += 1;
-                            Toast.makeText(OrderActivity.this, dishname6 + " Added to your order",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        dishesArray.clear();
+        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> adapter, View view,
+                                           int index, long arg3) {
+                String item_clicked = listview.getItemAtPosition(index).toString();
+                if (item_clicked.endsWith(dishname1)) {
+                    dish1 += 1;
+                    Toast.makeText(OrderActivity.this, dishname1 + " Added to your order",
+                            Toast.LENGTH_SHORT).show();
+                }
+                if (item_clicked.endsWith(dishname2)) {
+                    dish2 += 1;
+                    Toast.makeText(OrderActivity.this, dishname2 + " Added to your order",
+                            Toast.LENGTH_SHORT).show();
+                }
+                if (item_clicked.endsWith(dishname3)) {
+                    dish3 += 1;
+                    Toast.makeText(OrderActivity.this, dishname3 + " Added to your order",
+                            Toast.LENGTH_SHORT).show();
+                }
+                if (item_clicked.endsWith(dishname4)) {
+                    dish4 += 1;
+                    Toast.makeText(OrderActivity.this, dishname4 + " Added to your order",
+                            Toast.LENGTH_SHORT).show();
+                }
+                if (item_clicked.endsWith(dishname5)) {
+                    dish5 += 1;
+                    Toast.makeText(OrderActivity.this, dishname5 + " Added to your order",
+                            Toast.LENGTH_SHORT).show();
+                }
+                if (item_clicked.endsWith(dishname6)) {
+                    dish6 += 1;
+                    Toast.makeText(OrderActivity.this, dishname6 + " Added to your order",
+                            Toast.LENGTH_SHORT).show();
+                }
+                dishesArray.clear();
 
 
-                        if (dish1 != 0) {
-                            dishesArray.add(dish1 + " X" + dishname1);
-                        }
-                        if (dish2 != 0) {
-                            dishesArray.add(dish2 + " X" + dishname2);
-                        }
-                        if (dish3 != 0) {
-                            dishesArray.add(dish3 + " X" + dishname3);
-                        }
-                        if (dish4 != 0) {
-                            dishesArray.add(dish4 + " X" + dishname4);
-                        }
-                        if (dish5 != 0) {
-                            dishesArray.add(dish5 + " X" + dishname5);
-                        }
-                        if (dish6 != 0) {
-                            dishesArray.add(dish6 + " X" + dishname6);
-                        }
-
-                        return true;
-                    }
-                });
-
-                List<String> newList = new ArrayList<>();
-                newList = dishesArray;
-                MyAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                        android.R.layout.simple_list_item_1, newList);
-
-                listview.setAdapter(MyAdapter);
+                if (dish1 != 0) {
+                    dishesArray.add(dish1 + " X" + dishname1);
+                }
+                if (dish2 != 0) {
+                    dishesArray.add(dish2 + " X" + dishname2);
+                }
+                if (dish3 != 0) {
+                    dishesArray.add(dish3 + " X" + dishname3);
+                }
+                if (dish4 != 0) {
+                    dishesArray.add(dish4 + " X" + dishname4);
+                }
+                if (dish5 != 0) {
+                    dishesArray.add(dish5 + " X" + dishname5);
+                }
+                if (dish6 != 0) {
+                    dishesArray.add(dish6 + " X" + dishname6);
+                }
 
                 MyAdapter.notifyDataSetChanged();
-
                 saveToSharedPrefs();
+                return true;
             }
         });
     }
